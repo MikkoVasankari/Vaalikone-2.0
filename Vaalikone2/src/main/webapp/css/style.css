@@ -1,0 +1,97 @@
+.bg-img {
+	/* The image used */
+	background-image: url("../img/valtakunnantalo.png");
+	height: 1200px;
+	/* Center and scale the image */
+	background-position: center;
+	background-repeat: no-repeat;
+	background-size: cover;
+	/* Position the navbar */
+	position: relative;
+}
+
+.container1 {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 140px;
+}
+
+.button1 {
+	text-decoration: none;
+	font-size: 25px;
+	color: black;
+	padding: 10px 25px;
+	border: 3px solid green;
+	position: relative;
+}
+
+.button1::before, .button1::after {
+	content: "";
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	border: inherit;
+	transition: all 1s;
+}
+
+.button1::before {
+	top: -15px;
+	left: -15px;
+	border-width: 3px 0 0 3px;
+}
+
+.button1::after {
+	bottom: -15px;
+	right: -15px;
+	border-width: 0 3px 3px 0;
+}
+
+.button1:hover::before, .button1:hover::after {
+	width: calc(100% + 27px);
+	height: calc(100% + 27px);
+}
+
+/* The navbar */
+.topnav {
+	background-color: transparent;
+	overflow: hidden;
+}
+
+/* Navbar links */
+.topnav a {
+	float: right;
+	color: #f2f2f2;
+	text-align: center;
+	padding: 24px 26px;
+	text-decoration: none;
+	font-size: 22px;
+	margin-right: 60px;
+}
+
+.topnav a:hover {
+	background-color: #ddd;
+	color: black;
+}
+
+/* Container 2 */
+.container2 {
+	padding-left: 220px;
+	padding-top: 200px; . container { font-size : 15px;
+
+	padding-top: 200px;
+	
+}
+.container {
+	font-size: 15px;
+
+	font-style: italic;
+	text-align: center;
+}
+
+.wrapper {
+	text-align: center;
+	display: inline-block;
+	width: calc(50% - 20px);
+	margin-top: 90px;
+}

@@ -1,0 +1,97 @@
+@charset "ISO-8859-1";
+
+body {
+	background-color: powderblue;
+	margin: 20px 150px 20px 150px;
+}
+
+
+table {
+	border: 1px solid black;
+	background-color: #ffffff;
+	width: 100%;
+}
+
+
+th {
+	border-bottom: 1px solid #400040;
+}
+
+h2 {
+	text-align: center;
+}
+
+h3 {
+	text-align: center;
+}
+
+h4 {
+	text-align: center;
+}
+
+p {
+	text-align: center;
+}
+
+
+table {
+	border: 1px solid;
+	
+}
+
+
+.button1 {
+	text-decoration: none;
+	font-size: 25px;
+	color: black;
+	padding: 10px 25px;
+	border: 3px solid green;
+	position: relative;
+}
+
+.button1::before, .button1::after {
+	content: "";
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	border: inherit;
+	transition: all 1s;
+}
+
+.button1::before {
+	top: -15px;
+	left: -15px;
+	border-width: 3px 0 0 3px;
+}
+
+.button1::after {
+	bottom: -15px;
+	right: -15px;
+	border-width: 0 3px 3px 0;
+}
+
+.button1:hover::before, .button1:hover::after {
+	width: calc(100% + 27px);
+	height: calc(100% + 27px);
+}
+
+* {
+	box-sizing: border-box;
+}
+
+/* Create a two-column layout */
+
+h5 {
+	text-align: center;
+	border-color: red;
+	border-bottom: 5px;
+}
+h7 {
+	text-align: center;
+}
+
+
+.wrapper1 {
+	text-align: center;
+}
+
