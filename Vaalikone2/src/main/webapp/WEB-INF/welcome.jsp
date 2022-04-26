@@ -26,4 +26,4 @@
 	<form action="logout"></form>
 		<input type="submit" value="Logout">
 </body>
-</html>>
+</html>

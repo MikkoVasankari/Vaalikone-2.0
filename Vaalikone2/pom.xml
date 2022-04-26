@@ -94,6 +94,72 @@
         </dependency>
         <!-- Test Dependencies -->
             
+            <!-- BEGIN: Added by Pena -->
+        
+
+<!-- This dependency is needed for annotations (e.g. @Path, @Consumes, @Produces etc.) in the REST-class-->
+	<dependency>
+	    <groupId>org.glassfish.jersey.media</groupId>
+	    <artifactId>jersey-media-json-jackson</artifactId>
+	    <version>2.27</version>
+	</dependency>
+
+<!-- This is needed that your server can handle REST-class as a servlet.
+		e.g. the class org.glassfish.jersey.servlet.ServletContainer 
+		in the project's web.xml file can be found from this library --> 
+	<dependency>
+		<groupId>org.glassfish.jersey.containers</groupId>
+		<artifactId>jersey-container-servlet</artifactId>
+		<version>2.27</version>
+	</dependency>
+
+<!-- This is needed because of injections  - server can inject our extra classes into resource -->	
+	<dependency>
+		<groupId>org.glassfish.jersey.inject</groupId>
+		<artifactId>jersey-hk2</artifactId>
+		<version>2.27</version>
+	</dependency>
+
+
+<!-- This is needed to be able to connect to MySQL database. -->	
+	<dependency>
+		<groupId>mysql</groupId>
+		<artifactId>mysql-connector-java</artifactId>
+		<version>5.1.44</version>
+	</dependency>
+	
+
+<!-- https://mvnrepository.com/artifact/org.eclipse.persistence/eclipselink 
+	Eclipselink JPA Implementation 
+-->
+<dependency>
+    <groupId>org.eclipse.persistence</groupId>
+    <artifactId>eclipselink</artifactId>
+    <version>2.5.0</version>
+</dependency>        
+        
+        
+        	<!-- 
+	If using Java 11 or newer add next two.
+	These are moved to servlet api and not any more in Java SE API 
+	 -->
+	<dependency>
+	    <groupId>javax.xml.bind</groupId>
+	    <artifactId>jaxb-api</artifactId>
+	    <version>2.3.0</version>
+	</dependency>
+	<dependency>
+	    <groupId>javax.activation</groupId>
+	    <artifactId>activation</artifactId>
+	    <version>1.1.1</version>
+	</dependency>
+
+<!-- END: Added by Pena -->
+            
+            
+            
+            
+            
         <dependency>
                   
             <groupId>junit</groupId>
