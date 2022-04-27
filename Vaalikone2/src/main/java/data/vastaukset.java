@@ -1,36 +1,28 @@
 package data;
 
 import java.io.Serializable;
-import java.util.List;
-
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-import javax.persistence.NamedQuery;
-
 
 @Entity
-@NamedQuery(name="vastaukset.findAll", query="SELECT f FROM vastaukset f")
-public class vastaukset implements Serializable{
-	
+public class vastaukset implements Serializable {
+
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int ehdokas_id;
+	@Id
 	private int kysymys_id;
+	
 	private int vastaus;
 	private String kommentti;
 	private int ehdokas_num;
 	
-	@ManyToMany(mappedBy="vastaukset")
-	private List<ehdokkaat> ehdokkaat;
+
 	
 	public vastaukset() {
-		
+
 	}
-	
+
 	public vastaukset(int ehdokas_id, int kysymys_id, int vastaus, String kommentti, int ehdokas_num) {
 		this.ehdokas_id = ehdokas_id;
 		this.kysymys_id = kysymys_id;
@@ -78,7 +70,6 @@ public class vastaukset implements Serializable{
 	public void setEhdokas_num(int ehdokas_num) {
 		this.ehdokas_num = ehdokas_num;
 	}
-	
-	
-	
+
 }
+

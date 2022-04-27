@@ -9,6 +9,7 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org
 	Here there is just one: app.Fish. All the other should be added in the same way. -->	
 	<class>data.ehdokkaat</class>
 	<class>data.vastaukset</class>
+	<class>data.kysymykset</class>
 	
 	
 <!-- If using MySQL 5.7 or newer -->

@@ -1,19 +1,12 @@
 package data;
 
 import java.io.Serializable;
-import java.util.List;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinTable;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
-import javax.persistence.NamedQuery;
 
 @Entity
-@NamedQuery(name="ehdokkaat.findAll", query="SELECT x FROM ehdokkaat x")
 public class ehdokkaat implements Serializable{
 	
 	@Id
@@ -26,14 +19,6 @@ public class ehdokkaat implements Serializable{
 	private String ammatti;
 	private String kommentti;
 
-	@ManyToMany
-	@JoinTable(
-		name="vastaukset"
-		, joinColumns={
-			@JoinColumn(name="EHDOKAS_ID")
-			}
-		)
-	private List<vastaukset> vastaukset;
 	
 	
 	public ehdokkaat() {
