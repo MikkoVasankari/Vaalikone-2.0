@@ -97,6 +97,7 @@
             <!-- BEGIN: Added by Pena -->
         
 
+
 <!-- This dependency is needed for annotations (e.g. @Path, @Consumes, @Produces etc.) in the REST-class-->
 	<dependency>
 	    <groupId>org.glassfish.jersey.media</groupId>

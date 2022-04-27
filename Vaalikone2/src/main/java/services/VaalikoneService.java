@@ -1,16 +1,23 @@
 package services;
 
+import java.io.IOException;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+
 
 
 import data.ehdokkaat;
@@ -61,13 +68,28 @@ public class VaalikoneService {
 	@GET
     @Path("/getehdokkaat")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<ehdokkaat> getehdokkaat() {
+    public void getehdokkaat(@Context HttpServletRequest request,
+    	    @Context HttpServletResponse response)
+	{
+    	
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
         List<ehdokkaat> list = em.createQuery("select x from ehdokkaat x").getResultList();
         em.getTransaction().commit();
-        return list;
+        request.setAttribute("ehdokkaat", list);
+        RequestDispatcher rd=request.getRequestDispatcher("/jsp/MuokkaaEhdokkaita.jsp");
+        try {
+			rd.forward(request, response);
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 	
+    
+    
 	
  }
