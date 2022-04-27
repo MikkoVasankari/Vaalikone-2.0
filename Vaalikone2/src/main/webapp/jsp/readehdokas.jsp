@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    
-    
+	pageEncoding="ISO-8859-1"%>
+
+
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="data.ehdokkaat"%>
-<%@page import="service.servicereadehdokas"%>
+
 
 
 <!DOCTYPE html>
@@ -15,17 +15,32 @@
 </head>
 <body>
 
-<h1>Testi</h1><!-- ei toimiva viel‰
- --> 
-<%
-        ehdokkaat ehdokas = (ehdokkaat) request.getAttribute("ehdokas");
+	<h1>Ehdokas tulisi t‰n alle</h1>
+	<!-- ei toimiva viel‰
+ -->
+	
 
-        out.println(ehdokas.getEhdokas_Id() + " " + ehdokas.getEtunimi()
-                );
-
-%>
-
-
+	<h3>Lis‰‰ kuva</h3>
+<!--  
+	<form action="/rest/read1ehdokas/uploadfile" method="post" enctype="multipart/from-data">
+		Valitse kuvatiedosto : <input type="file" name="file"  /><br>
+		 : <input type="text" name="nimi" /><br>
+		<input type="submit" value="Upload" />
+		
+		
+	</form>
+-->	
+	
+	<form action="/rest/read1ehdokas/uploadfile" method="post" enctype="multipart/form-data">
+    Valitse kuvatiedosto : <input type="file" name="file" accept=".jpg" /><br>
+    Nimi : <input type="text" name="nimi" /><br>
+    <input type="submit" value="Upload" />
+   </form>
+	
+	
+	
+	
+	
 
 
 </body>
