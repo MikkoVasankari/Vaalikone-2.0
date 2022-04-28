@@ -10,7 +10,6 @@ import javax.persistence.Id;
 public class ehdokkaat implements Serializable{
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int ehdokas_id;
 	private String etunimi;
 	private int ehdokas_num;

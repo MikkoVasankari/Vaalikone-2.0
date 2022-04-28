@@ -27,106 +27,94 @@ body {
 
 .radio input[type="radio"] {
 	position: absolute;
-	right: 17%; margin : 0;
+	right: 17%;
+	margin: 0;
 	bottom: 0;
 	margin: 0;
 }
 </style>
 </head>
-<script type="text/javascript">
-	function saveVastaukset{
-		var vastaukset = new Object();
-		
-		
-		var xmlhttp=new XMLHttpRequest();
-		xmlhttp.onreadystatechange = function() {
-		  if (this.readyState == 4 && this.status == 200) {
-			    document.getElementById("result").innerHTML = this.responseText;
-			  	//Empty form fields
-			    form.breed.value="";
-			    form.weight.value="";
-		  }
-		};
-		xmlhttp.open("POST", "/rest/ehdokasservice/savevastaukset", true);
-		xmlhttp.setRequestHeader("Content-type", "application/json");
-		xmlhttp.send(jsonFish);	
-	}
-	
-</script>
+
 
 <body>
 
+	<form method='post' action='/rest/ehdokasservice/savevastaukset'>
 
-	<%
-	ehdokkaat ehdokas = (ehdokkaat) request.getAttribute("ehdokas");
 
-	out.println(
-
-			ehdokas.getEhdokas_id() + " " + ehdokas.getEtunimi()
-	
-	);
-	
-	%>
-
-	<form method='post' action=''>
-	
-		<h4> Ehdokkaan antamat vastaukset kysymyksiin </h4>
-		
 		<%
-		
+		ehdokkaat ehdokas = (ehdokkaat) request.getAttribute("ehdokas");
+		out.println(
+				"<p name=ehdokas value=" + ehdokas.getEhdokas_num() + ">"
+				+ ehdokas.getEhdokas_num() + ". " + ehdokas.getEtunimi()
+					);
+		%>
+
+		<h4>Ehdokkaan antamat vastaukset kysymyksiin</h4>
+
+		<%
 		@SuppressWarnings("unchecked")
-		List <vastaukset> vastauksetlista = (List<vastaukset>) request.getAttribute("ehdokkaanvastaukset");
+		List<vastaukset> vastauksetlista = (List<vastaukset>) request.getAttribute("ehdokkaanvastaukset");
 		@SuppressWarnings("unchecked")
-		List <kysymykset> kysymyksetlista = (List<kysymykset>) request.getAttribute("kysymykset");
-		
+		List<kysymykset> kysymyksetlista = (List<kysymykset>) request.getAttribute("kysymykset");
+
 		for (int i = 0; vastauksetlista != null && i < vastauksetlista.size(); i++) {
 			vastaukset vastaus = vastauksetlista.get(i);
 			kysymykset kysymys = kysymyksetlista.get(i);
-			
-			out.println(kysymys.getKysymys() + "<br>" + "<br>");
-					
-			if(vastaus.getVastaus() == 1){
-				out.println("<div class='radio'> <input type='radio' name=" + 'q' + vastaus.getKysymys_id() +"  value='1' checked = 'checked'> 1 </div>");
-			}else{
 
-				out.println("<div class='radio'> <input type='radio' name=" + 'q' + vastaus.getKysymys_id() +"  value='1'> 1 </div>");
-			}
-			
-			if(vastaus.getVastaus() == 2){
-				out.println("<div class='radio'> <input type='radio' name=" + 'q' + vastaus.getKysymys_id() +"  value='2' checked = 'checked'> 2 </div>");
-			}else{
+			out.println("<p name=kysymys" + kysymys.getKysymys_id() + " value=" + kysymys.getKysymys_id() + ">"
+			+ kysymys.getKysymys_id() + ". " + kysymys.getKysymys() + "<br>");
 
-				out.println("<div class='radio'> <input type='radio' name=" + 'q' + vastaus.getKysymys_id() +"  value='2'> 2 </div>");
-			}
-			
-			if(vastaus.getVastaus() == 3){
-				out.println("<div class='radio'> <input type='radio' name=" + 'q' + vastaus.getKysymys_id() +"  value='3' checked = 'checked'> 3 </div>");
-			}else{
+			if (vastaus.getVastaus() == 1) {
+				out.println("<div class='radio'> <input type='radio' name=" + 'q' + vastaus.getKysymys_id()
+				+ "  value='1' checked = 'checked'> 1 </div>");
+			} else {
 
-				out.println("<div class='radio'> <input type='radio' name=" + 'q' + vastaus.getKysymys_id() +"  value='3'> 3 </div>");
+				out.println("<div class='radio'> <input type='radio' name=" + 'q' + vastaus.getKysymys_id()
+				+ "  value='1'> 1 </div>");
 			}
-			
-			if(vastaus.getVastaus() == 4){
-				out.println("<div class='radio'> <input type='radio' name=" + 'q' + vastaus.getKysymys_id() +"  value='4' checked = 'checked'> 4 </div>");
-			}else{
 
-				out.println("<div class='radio'> <input type='radio' name=" + 'q' + vastaus.getKysymys_id() +"  value='4'> 4 </div>");
-			}
-			
-			if(vastaus.getVastaus() == 5){
-				out.println("<div class='radio'> <input type='radio' name=" + 'q' + vastaus.getKysymys_id() +"  value='5' checked = 'checked'> 5 </div>");
-			}else{
+			if (vastaus.getVastaus() == 2) {
+				out.println("<div class='radio'> <input type='radio' name=" + 'q' + vastaus.getKysymys_id()
+				+ "  value='2' checked = 'checked'> 2 </div>");
+			} else {
 
-				out.println("<div class='radio'> <input type='radio' name=" + 'q' + vastaus.getKysymys_id() +"  value='5'> 5 </div>");
+				out.println("<div class='radio'> <input type='radio' name=" + 'q' + vastaus.getKysymys_id()
+				+ "  value='2'> 2 </div>");
 			}
-			
+
+			if (vastaus.getVastaus() == 3) {
+				out.println("<div class='radio'> <input type='radio' name=" + 'q' + vastaus.getKysymys_id()
+				+ "  value='3' checked = 'checked'> 3 </div>");
+			} else {
+
+				out.println("<div class='radio'> <input type='radio' name=" + 'q' + vastaus.getKysymys_id()
+				+ "  value='3'> 3 </div>");
+			}
+
+			if (vastaus.getVastaus() == 4) {
+				out.println("<div class='radio'> <input type='radio' name=" + 'q' + vastaus.getKysymys_id()
+				+ "  value='4' checked = 'checked'> 4 </div>");
+			} else {
+
+				out.println("<div class='radio'> <input type='radio' name=" + 'q' + vastaus.getKysymys_id()
+				+ "  value='4'> 4 </div>");
+			}
+
+			if (vastaus.getVastaus() == 5) {
+				out.println("<div class='radio'> <input type='radio' name=" + 'q' + vastaus.getKysymys_id()
+				+ "  value='5' checked = 'checked'> 5 </div>");
+			} else {
+
+				out.println("<div class='radio'> <input type='radio' name=" + 'q' + vastaus.getKysymys_id()
+				+ "  value='5'> 5 </div>");
+			}
+
 			out.println("<br>");
 			out.println("<br>");
-			}
+		}
 		%>
 
-		<button class='button1' type="submit" name="kysymyksetSubmit"
-			id="kysymyksetSubmit" onclick="">Tallenna vastaukset</button>
+		<button class='button1' type="submit" >Tallenna vastaukset</button>
 	</form>
 </body>
 </html>
