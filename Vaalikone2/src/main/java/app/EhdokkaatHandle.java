@@ -19,9 +19,11 @@ import javax.ws.rs.client.Invocation.Builder;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
+
+
 import data.ehdokkaat;
 
-@WebServlet(urlPatterns = { "/readehdokkaat", "/readtoupdateehdokkaat", "/addehdokkaat" })
+@WebServlet(urlPatterns = { "/readehdokkaat", "/readtoupdateehdokkaat", "/addehdokkaat", "/deleteehdokas" })
 public class EhdokkaatHandle extends HttpServlet {
 
 	@Override
@@ -37,6 +39,9 @@ public class EhdokkaatHandle extends HttpServlet {
 			  switch (action) {
 			  case "/readehdokkaat":
 				  list=readehdokkaat(request);break;
+			  case "/deleteehdokas":
+				  String id=request.getParameter("ehdokas_id");
+				  list=deleteehdokas(request);break;
 //			  case "/addehdokkaat":
 //				  list=addehdokkaat(request);break;
 			  case "/readtoupdatehdokkkaat":
@@ -46,8 +51,8 @@ public class EhdokkaatHandle extends HttpServlet {
 				  rd.forward(request, response);
 				  return;
 			  }	
-			  request.setAttribute("ehdokkaatlist", list);
-			  RequestDispatcher rd=request.getRequestDispatcher("./jsp/ehdokkaatupdateform.jsp");
+			  request.setAttribute("ehdokkaat", list);
+			  RequestDispatcher rd=request.getRequestDispatcher("./jsp/MuokkaaEhdokkaita.jsp");
 			  rd.forward(request, response);
 			  
 		  }
@@ -76,24 +81,22 @@ public class EhdokkaatHandle extends HttpServlet {
 				return returnedList;
 			}
 		  
-//			private List<ehdokkaat> addehdokkaat(HttpServletRequest request) {
-//				//A Fish object to send to our web-service 
-//				ehdokkaat f=new ehdokkaat(request.getParameter("etunimi"));  //LISÄYS TEHTY ehdokkaat.java - ei toimi muuten
-//				System.out.println(e);
-//				String uri = "http://127.0.0.1:8080/rest/vaalikoneservice/addehdokkaat";
-//				Client c=ClientBuilder.newClient();
-//				WebTarget wt=c.target(uri);
-//				Builder b=wt.request();
-//				//Here we create an Entity of a ehdokkaat object as JSON string format
-//				Entity<ehdokkaat> e=Entity.entity(f, MediaType.APPLICATION_JSON);
-//				//Create a GenericType to be able to get List of objects
-//				//This will be the second parameter of post method
-//				GenericType<List<ehdokkaat>> genericList = new GenericType<List<ehdokkaat>>() {};
-//				
-//				//Posting data (Entity<ArrayList<ehdokkaat>> f) to the given address
-//				List<ehdokkaat> returnedList=b.post(e, genericList);
-//				return returnedList;
-//			}
+			private List<ehdokkaat> deleteehdokas(HttpServletRequest request) {
+				String id=request.getParameter("ehdokas_id");
+				String uri = "http://127.0.0.1:8080/rest/vaalikoneservice/deleteehdokas/"+id;
+				Client c=ClientBuilder.newClient();
+				WebTarget wt=c.target(uri);
+				Builder b=wt.request();
+				//Create a GenericType to be able to get List of objects
+				//This will be the second parameter of post method
+				GenericType<List<ehdokkaat>> genericList = new GenericType<List<ehdokkaat>>() {};
+				
+				//Posting data (Entity<ArrayList<ehdokkaat>> e) to the given address
+				List<ehdokkaat> returnedList=b.delete(genericList);
+				return returnedList;
+			}
+			
+			
 		  
 	  }
 

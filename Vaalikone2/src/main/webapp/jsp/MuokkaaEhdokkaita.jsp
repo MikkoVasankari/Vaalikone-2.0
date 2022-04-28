@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <%@ page import="java.util.List"%>
+	pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ page import="java.util.List"%>
 
 
 <%@ page import="data.ehdokkaat"%>
@@ -12,59 +12,90 @@
 <style>
 body {
 	text-align: center;
+    background-color: powderblue;
 }
+
 
 table {
 	margin-left: auto;
 	margin-right: auto;
 }
+.wrapper2 {
+    text-align: center;
+    
+}
+.button1 {
+	text-decoration: none;
+	font-size: 25px;
+	color: black;
+	padding: 10px 25px;
+	border: 3px solid green;
+	position: relative;
+}
+
+.button1::before, .button1::after {
+	content: "";
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	border: inherit;
+	transition: all 1s;
+}
+
+.button1::before {
+	top: -15px;
+	left: -15px;
+	border-width: 3px 0 0 3px;
+}
+
+.button1::after {
+	bottom: -15px;
+	right: -15px;
+	border-width: 0 3px 3px 0;
+}
+
+.button1:hover::before, .button1:hover::after {
+	width: calc(100% + 27px);
+	height: calc(100% + 27px);
+}
 </style>
 <title>Muokkaa ehdokkaita</title>
 </head>
+<link href="../css/style.css" rel="stylesheet">
+<link href="../tyyli.css" rel="stylesheet">
 <body>
-<form action='../addehdokkaat' method='Post'>
-Jotain: <input type="text" name="etunimi" value=''>
-Jotain: <input type="text" name="id" value=''>
-<input type='submit' name='ok' value='OK'>
-</form>
+<br></br> <br></br>
+	<div class="wrapper2">
 
-	<div class="container">
-		<%
+		<a href='/showKysymysAdmin' class='button1'>LISÄÄ EHDOKAS TAI JOTAIN
+			NAPPULA </a>
+
+	
+<br></br>
+
+
+
+
+
+
+	<c:forEach var="ehdokkaat" items="${requestScope.ehdokkaat}">
+		<h3>Ehdokas</h3>
 		
-		List<ehdokkaat> ehdokkaatList = (List<ehdokkaat>) request.getAttribute("ehdokkaat");
+		<h4>${ehdokkaat.etunimi}</h4>
+		<a>Ehdokkaan numero ${ehdokkaat.ehdokas_num}</a><br>
 		
-		for (int i = 0; ehdokkaatList != null && i < ehdokkaatList.size(); i++) {
-			ehdokkaat e = ehdokkaatList.get(i);
-			
-			int ehdokas_id = e.getEhdokas_id();
-			String etunimi = e.getEtunimi();
-			int ehdokas_num = e.getEhdokas_num();
-			String kotipaikkakunta = e.getKotipaikkakunta();
-			int ika = e.getIka();
-			String ammatti = e.getAmmatti();
-			String kommentti = e.getKommentti();
-			
-			out.println("<table>" + "<th>" + "<h2>" + e.getEhdokas_num() + ". " + e.getEtunimi() + "</h2>" + "</th>" + "</table>"
-					+ "Muokkaa ehdokasta" + "<br>" +  "Poista ehdokas"
-					
-					
-					
-					);
-			
-		
-		}
-			
-		
-		%>
+		<a href="../deleteehdokas?id=${ehdokkaat.ehdokas_id}" onclick="return confirm('Oletko varma, että haluat poistaa ehdokkaan')">Poista ehdokas </a>
+		<br>
+		<a href="../updateEhdokas?id=${ehdokkaat.ehdokas_id}">Muokkaa ehdokasta</a>
+		<br><br><br><br>
+	</c:forEach>
+
+
+
+
+
 
 </div>
-
-
-
-<c:forEach var="ehdokkaat" items="${requestScope.ehdokkaat}">
-	<li>${ehdokkaat} <a href="../deleteEhdokas?id=${ehdokas.id}"> Poista</a> <a href="../updateEhdokas?id=${ehdokas.id}">Muokkaa</a>
-</c:forEach>
-
 
 </body>
 </html>

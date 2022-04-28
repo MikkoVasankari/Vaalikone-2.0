@@ -10,6 +10,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -18,14 +19,25 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 
-
-
 import data.ehdokkaat;
 
 
 @Path("/vaalikoneservice")
 public class VaalikoneService {
 	EntityManagerFactory emf=Persistence.createEntityManagerFactory("vaalikone");
+	
+
+	@GET
+	@Path("/readtoupdateehdokkaat/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public ehdokkaat readToUpdateEhdokkaat(@PathParam("id") int id) {
+		EntityManager em=emf.createEntityManager();
+		em.getTransaction().begin();
+		ehdokkaat e=em.find(ehdokkaat.class, id);
+		em.getTransaction().commit();
+		return e;
+	}	
 	
 	@GET
 	@Path("/readehdokkaat")
@@ -46,24 +58,12 @@ public class VaalikoneService {
 	public List<ehdokkaat> addEhdokkaat(ehdokkaat ehdokkaat) {
 		EntityManager em=emf.createEntityManager();
 		em.getTransaction().begin();
-		em.persist(ehdokkaat);//The actual insertion line
+		em.persist(ehdokkaat);
 		em.getTransaction().commit();
-		//Calling the method readFish() of this service
 		List<ehdokkaat> list=readEhdokkaat();		
 		return list;
 	}	
 	
-	@GET
-	@Path("/readtoupdateehdokkaat/{id}")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public ehdokkaat readToUpdateEhdokkaat(@PathParam("id") int id) {
-		EntityManager em=emf.createEntityManager();
-		em.getTransaction().begin();
-		ehdokkaat e=em.find(ehdokkaat.class, id);
-		em.getTransaction().commit();
-		return e;
-	}	
 	
 	@GET
     @Path("/getehdokkaat")
@@ -89,7 +89,24 @@ public class VaalikoneService {
 		}
     }
 	
-    
-    
+	@DELETE
+	@Path("/deleteehdokas/{ehdokas_id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public List<ehdokkaat> deleteehdokas(@PathParam("id") int id ) {
+		EntityManager em=emf.createEntityManager();
+		em.getTransaction().begin();
+		ehdokkaat e=em.find(ehdokkaat.class, id);
+		if (e!=null) {
+			em.remove(e);//The actual insertion line
+		}
+		em.getTransaction().commit();
+		//Calling the method readEhdokkaat() of this service
+		
+		List<ehdokkaat> list=readEhdokkaat();		
+		return list;
+	}	
+	
+	
 	
  }

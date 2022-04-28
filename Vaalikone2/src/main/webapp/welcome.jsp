@@ -43,7 +43,7 @@ body {
         <br></br> <br></br> <a href='/showKysymysAdmin' class='button1'>Muokkaa
             kyselyitä </a> <br></br> <br></br>
 
-        <br></br> <br></br> <a href='' class='button1'>Muokkaa
+        <br></br> <br></br> <a href='/rest/vaalikoneservice/getehdokkaat' class='button1'>Muokkaa
             ehdokkaita </a> <br></br> <br></br>
 
         <form action="logout"></form>
