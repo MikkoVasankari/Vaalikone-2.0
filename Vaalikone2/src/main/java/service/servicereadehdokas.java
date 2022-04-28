@@ -10,8 +10,11 @@ import java.io.OutputStream;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -40,13 +43,16 @@ public class servicereadehdokas {
 	@Path("/getehdokas/{id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public ehdokkaat read1ehdokas(@PathParam("id") int ehdokas_id) {
+	public void read1ehdokas(@PathParam("id") int ehdokas_num, @Context HttpServletRequest request, 
+			@Context HttpServletResponse response) throws ServletException, IOException {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
-		ehdokkaat e = em.find(ehdokkaat.class, ehdokas_id);
+		ehdokkaat e = em.find(ehdokkaat.class, ehdokas_num);
 		em.getTransaction().commit();
 		
-		return e;
+		request.setAttribute("ehdokas", e);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/readehdokas.jsp");
+		rd.forward(request,  response);
 	}
 
 	@POST
@@ -72,12 +78,29 @@ public class servicereadehdokas {
 	        out.flush();
 	        out.close();
 	        
+	        
+	        
 	    } 
+	    
 	    catch (IOException e){
 	        throw new WebApplicationException("Error while uploading file. Please try again !!");
 	    }
-	    return Response.ok("Data uploaded successfully !!").build();
+	    return Response.ok("Ladattu !!").build();
 	}
+	
+//	@POST
+//	@Path("pictodatabase")
+//	@Consumes(MediaType.MULTIPART_FORM_DATA)
+//	public void addkuva(@FormDataParam("file") InputStream fileInputStream,
+//			@FormDataParam("file") FormDataContentDisposition fileMetaData,
+//			@FormDataParam("nimi") String nimi) {
+//		
+//		kuva Kuva = new kuva(fileMetaData.getFileName(), nimi);
+//		EntityManager em = emf.createEntityManager();
+//		em.getTransaction().begin();
+//		em.persist(Kuva);
+//		em.getTransaction().commit();
+//	}
 			
 			
 }

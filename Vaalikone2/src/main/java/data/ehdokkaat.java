@@ -19,8 +19,9 @@ public class ehdokkaat {
     private int ika;
     private String ammatti;
     private String kommentti;
+    private String kuva;
    
-	public ehdokkaat(String ehdokas_id, String etunimi, String ehdokas_num, String kotipaikkakunta, int ika, String ammatti, String kommentti) {
+	public ehdokkaat(String ehdokas_id, String etunimi, String ehdokas_num, String kotipaikkakunta, int ika, String ammatti, String kommentti, String kuva) {
         // TODO Auto-generated constructor stub
         setEhdokas_Id(ehdokas_id);
         this.etunimi=etunimi;
@@ -28,9 +29,16 @@ public class ehdokkaat {
         this.ika=ika;
         this.ammatti=ammatti;
         this.kommentti=kommentti;
+        this.kuva=kuva;
         this.setEhdokas_num(ehdokas_num);
     }
-    public ehdokkaat(int id ) {
+    public String getKuva() {
+		return kuva;
+	}
+	public void setKuva(String kuva) {
+		this.kuva = kuva;
+	}
+	public ehdokkaat(int id ) {
 		this.ehdokas_id = id;
 		
 	}
