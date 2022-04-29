@@ -17,10 +17,14 @@ public class vastaukset implements Serializable {
 	private String kommentti;
 	private int ehdokas_num;
 	
-
 	
 	public vastaukset() {
 
+	}
+	
+	public vastaukset(int ehdokas_id,int vastaus) {
+		this.ehdokas_id = ehdokas_id;
+		this.vastaus = vastaus;
 	}
 
 	public vastaukset(int ehdokas_id, int kysymys_id, int vastaus, String kommentti, int ehdokas_num) {

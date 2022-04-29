@@ -1,7 +1,6 @@
 package service;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -13,19 +12,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
+
+
 import data.ehdokkaat;
 import data.vastaukset;
 import data.kysymykset;
 
 @Path("/ehdokasservice")
 public class ehdokasService {
-
 	EntityManagerFactory emf = Persistence.createEntityManagerFactory("vaalikone");
 
 	@GET
@@ -106,42 +106,23 @@ public class ehdokasService {
 		return list;
 	}
 
-	@GET
-	@Path("/getehdokkaanvastaukset/{ehdokas_num}")
-	@Produces(MediaType.APPLICATION_JSON)
-	public List<vastaukset> getehdokkaanvastaukset(@PathParam("ehdokas_num") int ehdokas_num) {
-
-		EntityManager em = emf.createEntityManager();
-		em.getTransaction().begin();
-		@SuppressWarnings("unchecked")
-		List<vastaukset> list = em.createQuery("select x from vastaukset x where x.ehdokas_num=?2")
-				.setParameter(2, ehdokas_num).getResultList();
-		em.getTransaction().commit();
-		em.close();
-		return list;
-	}
-
-	// Tallennetaan päivitetyt ehdokkaan vastaukset tietokantaa
-//	@POST
-//	@Path("/savevastaukset")
-//	@Consumes(MediaType.APPLICATION_JSON)
-//	@Produces(MediaType.APPLICATION_JSON)
-//	public void savevastaukset(vastaukset ehdokkaanVastaukset) {
-//
-//		EntityManager em = emf.createEntityManager();
-//		em.getTransaction().begin();
-//		em.persist(ehdokkaanVastaukset);
-//		em.getTransaction().commit();
-//	}
 	
-	@POST
-	@Path("/savevastaukset")
-	public String printtaavastaukset() {
-//		String id = request.getParameter("ehdokas");
-//		System.out.print(id);
-//		return id;
-		
-		return "xd";
+	// Tallennetaan vastaukset tietokantaa
+	@PUT
+	@Path("/updatevastaus")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public List<vastaukset> updateVastaukset(vastaukset vastaus) {
+		EntityManager em=emf.createEntityManager();
+		em.getTransaction().begin();
+		vastaukset v=em.find(vastaukset.class, vastaus.getKysymys_id());
+		if (v!=null) {
+			em.merge(vastaus);//The actual update line
+		}
+		em.getTransaction().commit();
+		//Calling the method readFish() of this service
+		List<vastaukset> list=getVastaukset();		
+		return list;
 	}
 	
 

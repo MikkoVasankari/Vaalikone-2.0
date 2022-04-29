@@ -8,7 +8,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
+<meta charset=UTF-8 />
 <title>Ehdokkaan sivu</title>
 <link rel="icon" type="image" href="jou">
 <style>
@@ -38,19 +38,18 @@ body {
 
 <body>
 
-	<form method='post' action='/rest/ehdokasservice/savevastaukset'>
-
+	<form method='post' action="/handleVastaukset">
 
 		<%
 		ehdokkaat ehdokas = (ehdokkaat) request.getAttribute("ehdokas");
-		out.println(
-				"<p name=ehdokas value=" + ehdokas.getEhdokas_num() + ">"
-				+ ehdokas.getEhdokas_num() + ". " + ehdokas.getEtunimi()
-					);
+		out.println("<p id=ehdokas value=" + ehdokas.getEhdokas_num() + ">" + ehdokas.getEhdokas_num() + ". "
+				+ ehdokas.getEtunimi());
+		
+		out.println("<input type='hidden' name='id' value='"+ ehdokas.getEhdokas_id() +"'>");
 		%>
 
 		<h4>Ehdokkaan antamat vastaukset kysymyksiin</h4>
-
+		
 		<%
 		@SuppressWarnings("unchecked")
 		List<vastaukset> vastauksetlista = (List<vastaukset>) request.getAttribute("ehdokkaanvastaukset");
@@ -114,7 +113,8 @@ body {
 		}
 		%>
 
-		<button class='button1' type="submit" >Tallenna vastaukset</button>
+		<button class='button1' type="submit" onclick="">Tallenna
+			vastaukset</button>
 	</form>
 </body>
 </html>
