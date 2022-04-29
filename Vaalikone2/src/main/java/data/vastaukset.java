@@ -27,11 +27,10 @@ public class vastaukset implements Serializable {
 		this.vastaus = vastaus;
 	}
 
-	public vastaukset(int ehdokas_id, int kysymys_id, int vastaus, String kommentti, int ehdokas_num) {
+	public vastaukset(int ehdokas_id, int kysymys_id, int vastaus, int ehdokas_num) {
 		this.ehdokas_id = ehdokas_id;
 		this.kysymys_id = kysymys_id;
 		this.vastaus = vastaus;
-		this.kommentti = kommentti;
 		this.ehdokas_num = ehdokas_num;
 	}
 

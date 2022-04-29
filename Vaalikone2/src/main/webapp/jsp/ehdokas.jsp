@@ -10,7 +10,6 @@
 <head>
 <meta charset=UTF-8 />
 <title>Ehdokkaan sivu</title>
-<link rel="icon" type="image" href="jou">
 <style>
 body {
 	text-align: center;

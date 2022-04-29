@@ -69,7 +69,7 @@ public class ehdokasService {
 	}
 
 
-
+//	Haetaan kaikki ehdokkaat tietokannasta
 	@GET
 	@Path("/getehdokkaat")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -81,7 +81,7 @@ public class ehdokasService {
 		em.getTransaction().commit();
 		return list;
 	}
-
+//	Haetaan kaikki vastaukset tietokannasta
 	@GET
 	@Path("/getvastaukset")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -93,7 +93,7 @@ public class ehdokasService {
 		em.getTransaction().commit();
 		return list;
 	}
-
+//	Haetaan kaikki kysymykset tietokannasta
 	@GET
 	@Path("/getkysymykset")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -107,7 +107,7 @@ public class ehdokasService {
 	}
 
 	
-	// Tallennetaan vastaukset tietokantaa
+// Tallennetaan vastaukset tietokantaa
 	@PUT
 	@Path("/updatevastaus")
 	@Produces(MediaType.APPLICATION_JSON)
