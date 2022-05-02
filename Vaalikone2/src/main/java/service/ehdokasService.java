@@ -115,7 +115,7 @@ public class ehdokasService {
 	public List<vastaukset> updateVastaukset(vastaukset vastaus) {
 		EntityManager em=emf.createEntityManager();
 		em.getTransaction().begin();
-		vastaukset v=em.find(vastaukset.class, vastaus.getKysymys_id());
+		vastaukset v=em.find(vastaukset.class, vastaus.getVastaus());
 		if (v!=null) {
 			em.merge(vastaus);//The actual update line
 		}
