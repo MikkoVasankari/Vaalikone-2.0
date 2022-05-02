@@ -8,6 +8,10 @@ import javax.persistence.Id;
 @Entity
 public class vastaukset implements Serializable {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	private int ehdokas_id;
 	@Id

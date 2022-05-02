@@ -51,6 +51,12 @@ public class handleVastaukset extends HttpServlet {
 		ehdokkaat e = em1.find(ehdokkaat.class, integerehdokasid);
 		em1.getTransaction().commit();
 		
+		EntityManager em2 = emf.createEntityManager();
+		em2.getTransaction().begin();
+		@SuppressWarnings("unchecked")
+		List<vastaukset> list1 = em2.createQuery("select x from vastaukset x where x.ehdokas_id=?1")
+				.setParameter(1, integerehdokasid).getResultList();
+		
 		EntityManager em3 = emf.createEntityManager();
 		em3.getTransaction().begin();
 		@SuppressWarnings("unchecked")
@@ -58,7 +64,7 @@ public class handleVastaukset extends HttpServlet {
 		em3.getTransaction().commit();
 		System.out.println(list2.size());
 		
-		List<vastaukset> list1 = updateVastaukset(request);
+		List<vastaukset> list = updateVastaukset(request);
 		
 		request.setAttribute("ehdokas", e);
 		request.setAttribute("ehdokkaanvastaukset", list1);
