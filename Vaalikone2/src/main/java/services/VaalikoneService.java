@@ -13,6 +13,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -28,13 +29,13 @@ public class VaalikoneService {
 	
 
 	@GET
-	@Path("/readtoupdateehdokkaat/{id}")
+	@Path("/readtoupdateehdokkaat/{ehdokas_id}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public ehdokkaat readToUpdateEhdokkaat(@PathParam("id") int id) {
+	public ehdokkaat readToUpdateEhdokkaat(@PathParam("ehdokas_id") int ehdokas_id) {
 		EntityManager em=emf.createEntityManager();
 		em.getTransaction().begin();
-		ehdokkaat e=em.find(ehdokkaat.class, id);
+		ehdokkaat e=em.find(ehdokkaat.class, ehdokas_id);
 		em.getTransaction().commit();
 		return e;
 	}	
@@ -52,10 +53,10 @@ public class VaalikoneService {
 	
 	
 	@POST
-	@Path("/addehdokkaat")
+	@Path("/addehdokas")
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
-	public List<ehdokkaat> addEhdokkaat(ehdokkaat ehdokkaat) {
+	public List<ehdokkaat> addEhdokas(ehdokkaat ehdokkaat) {
 		EntityManager em=emf.createEntityManager();
 		em.getTransaction().begin();
 		em.persist(ehdokkaat);
@@ -63,6 +64,21 @@ public class VaalikoneService {
 		List<ehdokkaat> list=readEhdokkaat();		
 		return list;
 	}	
+	
+	@PUT
+	@Path("/updateehdokas")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public List<ehdokkaat> updateEhdokas(ehdokkaat ehdokkaat) {
+		EntityManager em=emf.createEntityManager();
+		em.getTransaction().begin();
+		ehdokkaat e=em.find(ehdokkaat.class, ehdokkaat.getEhdokas_id());
+		if (e!=null) {
+			em.merge(ehdokkaat);
+		}
+		List<ehdokkaat> list=readEhdokkaat();
+		return list;
+	}
 	
 	
 	@GET
@@ -92,11 +108,10 @@ public class VaalikoneService {
 	@DELETE
 	@Path("/deleteehdokas/{ehdokas_id}")
 	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public List<ehdokkaat> deleteehdokas(@PathParam("id") int id ) {
+	public List<ehdokkaat> deleteehdokas(@PathParam("ehdokas_id") int ehdokas_id ) {
 		EntityManager em=emf.createEntityManager();
 		em.getTransaction().begin();
-		ehdokkaat e=em.find(ehdokkaat.class, id);
+		ehdokkaat e=em.find(ehdokkaat.class, ehdokas_id);
 		if (e!=null) {
 			em.remove(e);//The actual insertion line
 		}

@@ -19,6 +19,10 @@ public class ehdokkaat
     private String kommentti;
     private int ehdokas_num;
 
+    
+    public ehdokkaat() {
+        // TODO Auto-generated constructor stub
+    }
 
 	public ehdokkaat(int ehdokas_id, String etunimi, int ehdokas_num, String kotipaikkakunta, int ika, String ammatti, String kommentti) {
         // TODO Auto-generated constructor stub
@@ -30,9 +34,15 @@ public class ehdokkaat
         this.kommentti=kommentti;
         this.ehdokas_num=ehdokas_num;
     }
-
-    public ehdokkaat() {
+	public ehdokkaat(String etunimi, int ehdokas_num, String kotipaikkakunta, int ika, String ammatti, String kommentti) {
         // TODO Auto-generated constructor stub
+
+        this.etunimi=etunimi;
+        this.kotipaikkakunta=kotipaikkakunta;
+        this.ika=ika;
+        this.ammatti=ammatti;
+        this.kommentti=kommentti;
+        this.ehdokas_num=ehdokas_num;
     }
 
 	public int getEhdokas_id() {
@@ -43,7 +53,32 @@ public class ehdokkaat
 		this.ehdokas_id = ehdokas_id;
 	}
 
+	public void setEhdokas_Id(String ehdokas_id) {
+		try {
+			this.ehdokas_id = Integer.parseInt(ehdokas_id);
+		}
+		catch(NumberFormatException | NullPointerException e) {
+			
+		}
+	}
 
+	public void setEhdokas_num(String ehdokas_num) {
+		try {
+			this.ehdokas_num = Integer.parseInt(ehdokas_num);
+		}
+		catch(NumberFormatException | NullPointerException e) {
+			
+		}
+	}
+	public void setIka(String ika) {
+		try {
+			this.ika = Integer.parseInt(ika);
+		}
+		catch(NumberFormatException | NullPointerException e) {
+			
+		}
+	}
+	
 	public String getEtunimi() {
 		return etunimi;
 	}

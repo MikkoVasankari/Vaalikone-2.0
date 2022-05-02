@@ -67,13 +67,10 @@ table {
 <br></br> <br></br>
 	<div class="wrapper2">
 
-		<a href='/showKysymysAdmin' class='button1'>LISÄÄ EHDOKAS TAI JOTAIN
-			NAPPULA </a>
+		<a href='/jsp/addehdokasform.jsp' class='button1'>LISÄÄ EHDOKAS</a>
 
 	
 <br></br>
-
-
 
 
 
@@ -83,10 +80,9 @@ table {
 		
 		<h4>${ehdokkaat.etunimi}</h4>
 		<a>Ehdokkaan numero ${ehdokkaat.ehdokas_num}</a><br>
-		
-		<a href="../deleteehdokas?id=${ehdokkaat.ehdokas_id}" onclick="return confirm('Oletko varma, että haluat poistaa ehdokkaan')">Poista ehdokas </a>
+		<a href="/deleteehdokas?ehdokas_id=${ehdokkaat.ehdokas_id}" onclick="return confirm('Oletko varma, että haluat poistaa ehdokkaan')">Poista ehdokas </a>
 		<br>
-		<a href="../updateEhdokas?id=${ehdokkaat.ehdokas_id}">Muokkaa ehdokasta</a>
+		<a href="/readtoupdateehdokkaat?ehdokas_id=${ehdokkaat.ehdokas_id}">Muokkaa ehdokasta</a>
 		<br><br><br><br>
 	</c:forEach>
 
