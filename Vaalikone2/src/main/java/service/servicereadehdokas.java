@@ -6,6 +6,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -28,6 +30,7 @@ import javax.ws.rs.core.Response;
 
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
+
 
 import data.ehdokkaat;
 
@@ -87,6 +90,40 @@ public class servicereadehdokas {
 	    }
 	    return Response.ok("Ladattu !!").build();
 	}
+	
+	
+//	@PUT
+//	@Path("/deletepicture/{kuva}")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	@Consumes(MediaType.APPLICATION_JSON)
+//	public void deletePicture(@PathParam("kuva") String kuva,
+//			@Context HttpServletRequest request,
+//			@Context HttpServletResponse response
+//			) {
+//		EntityManager em=emf.createEntityManager();
+//		em.getTransaction().begin();
+//		ehdokkaat f=em.find(ehdokkaat.class, kuva);
+//		if (f!=null) {
+//			em.remove(f);//The actual delete line
+//		}
+//		em.getTransaction().commit();
+//		
+//		
+//	}
+	
+	
+	@GET
+	@Path("/readehdokkaat")
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.APPLICATION_JSON)
+	public List<ehdokkaat> readehdokkaat() {
+		EntityManager em=emf.createEntityManager();
+		em.getTransaction().begin();
+		List<ehdokkaat> list=em.createQuery("select f from ehdokkaat f").getResultList();		
+		em.getTransaction().commit();
+		return list;
+	}	
+	
 	
 //	@POST
 //	@Path("pictodatabase")
