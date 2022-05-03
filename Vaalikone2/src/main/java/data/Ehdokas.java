@@ -5,11 +5,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
+@Entity  //Annotoitu
 public class Ehdokas {
-	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+
     private int id;
     private String etunimi;
     private String kotipaikkakunta;
@@ -18,6 +18,7 @@ public class Ehdokas {
     private String kommentti;
     private String ehdokas_num;
     private int tulos;
+    
     public int getTulos() {
 		return tulos;
 	}

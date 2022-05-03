@@ -51,9 +51,9 @@ body {
 			tarkoitus vasta kysymyksiin vaihtoehdoilla 1 - 5. <br>(1 =
 			Täysin eri mieltä, 5 = Täysin samaa mieltä)
 		</h3>
+		
+		
 		<form method='post' action='/showTulokset'>
-
-
 
 			<%
 			ArrayList<kysymys> kysymyslista = (ArrayList<kysymys>) request.getAttribute("kysymyslista");

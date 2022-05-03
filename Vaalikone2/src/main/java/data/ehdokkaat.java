@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+
 @Entity // Annotoitu
 public class ehdokkaat {
 	@Id
@@ -140,3 +141,4 @@ public class ehdokkaat {
 	}
 
 }
+
