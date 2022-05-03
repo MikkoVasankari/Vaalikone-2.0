@@ -69,7 +69,7 @@ table {
 					value="Lataa" /><br>
 
 
-
+<!--  -->
 
 				<!--  <c:forEach var="ehdokas" items="${requestScope.ehdokas}">
 					<li> ${ehdokas} <a href='/rest/read1ehdokas/deletepicture/${ehdokas.kuva }'>Delete</a> </li></c:forEach>	
