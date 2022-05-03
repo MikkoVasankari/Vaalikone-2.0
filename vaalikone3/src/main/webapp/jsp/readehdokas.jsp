@@ -52,7 +52,7 @@ table {
 					ehdokkaat ehdokas = (ehdokkaat) request.getAttribute("ehdokas");
 					out.println("<h3>" + "Nimi: " + ehdokas.getEtunimi() + " <br>" + "Kotipaikkakunta: "
 							+ ehdokas.getKotipaikkakunta() + " <br>" + "Ammatti: " + ehdokas.getAmmatti() + " <br>"
-							+ "Kommentti: " + ehdokas.getKommentti() + "<br>" + "<br>"  + "<img src='/pictures/"
+							+ "Kommentti: " + ehdokas.getKommentti() + "<br>" + "<br>" + "<img src='/pictures/"
 							+ ehdokas.getKuva() + "'>" + "</h3>");
 				%>
 			</td>
@@ -61,15 +61,18 @@ table {
 	<table>
 		<tr>
 			<h3>Lis‰‰ kuva</h3>
-
+				<!--  luodaan n‰kym‰tˆn input elementti jonka avulla saadaan ehdokkaan id rest palveluun l‰hetetty‰-->
 			<form action="/rest/read1ehdokas/uploadfile" method="post"
 				enctype="multipart/form-data">
+				<%
+					out.println("<input type='hidden' name='id' value='" + ehdokas.getEhdokas_Id() + "'>"); 
+				%>
 				Valitse kuvatiedosto : <input type="file" name="file" accept=".jpg" /><br>
 				Nimi : <input type="text" name="text" /> <input type="submit"
 					value="Lataa" /><br>
 
 
-<!--  -->
+
 
 				<!--  <c:forEach var="ehdokas" items="${requestScope.ehdokas}">
 					<li> ${ehdokas} <a href='/rest/read1ehdokas/deletepicture/${ehdokas.kuva }'>Delete</a> </li></c:forEach>	

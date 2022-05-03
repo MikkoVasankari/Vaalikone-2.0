@@ -79,6 +79,19 @@ public class ehdokkaat {
 	}
 
 
+	public ehdokkaat(int ehdokas_id2, String etunimi2, int ehdokas_num2, String kotipaikkakunta2, int ika2,
+			String ammatti2, String kommentti2, String fileName) {
+		// TODO Auto-generated constructor stub
+		this.ehdokas_id=ehdokas_id2;
+		this.etunimi = etunimi2;
+		this.kotipaikkakunta = kotipaikkakunta2;
+		this.ika = ika2;
+		this.ammatti = ammatti2;
+		this.kommentti = kommentti2;
+		this.ehdokas_num = ehdokas_num2;
+		this.kuva=fileName;
+	}
+
 	public int getEhdokas_num() {
 		return ehdokas_num;
 	}

@@ -61,17 +61,37 @@ public class servicereadehdokas {
 	@POST
 	@Path("/uploadfile")
 	@Consumes({MediaType.MULTIPART_FORM_DATA})
-	public Response uploadFile( @FormDataParam("file") InputStream fileInputStream,
+	public void uploadFile( @FormDataParam("file") InputStream fileInputStream,
             @FormDataParam("file") FormDataContentDisposition fileMetaData,
             @FormDataParam("nimi") String nimi,
-            //@FormDataParam("camera") String camera,
-            @Context ServletContext sc) 
+            @FormDataParam("id") int id,
+            @Context ServletContext sc, @Context HttpServletRequest request, 
+			@Context HttpServletResponse response) 
             		throws Exception
+
+            	
 	{
-		String UPLOAD_PATH = "C:/Users/OMISTAJA/Vaalikone-2.0/Vaalikone2/src/main/java/pictures";
+		
+
+		EntityManager em1 = emf.createEntityManager(); // hakee id:n perusteella ehdokkaan
+        em1.getTransaction().begin();
+        ehdokkaat e = em1.find(ehdokkaat.class,id);
+        em1.getTransaction().commit();
+		
+		ehdokkaat e1 = new ehdokkaat(e.getEhdokas_id(), e.getEtunimi(), e.getEhdokas_num(),
+		e.getKotipaikkakunta(), e.getIka(), e.getAmmatti(), e.getKommentti(), fileMetaData.getFileName());
+        
+        
+        
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		em.merge(e1);
+		em.getTransaction().commit();
+		
+		String UPLOAD_PATH = "C:/Users/OMISTAJA/Vaalikone-2.0/vaalikone3/src/main/webapp/pictures"; // pitäisi keksiä parempi keino
 	    try{
 	        int read = 0;
-	        byte[] bytes = new byte[1024];
+	        byte[] bytes = new byte[8192];
 	 
 	        OutputStream out = new FileOutputStream(new File(UPLOAD_PATH + "/"+fileMetaData.getFileName()));
 	        while ((read = fileInputStream.read(bytes)) != -1) 
@@ -85,10 +105,18 @@ public class servicereadehdokas {
 	        
 	    } 
 	    
-	    catch (IOException e){
+	    catch (IOException f){
 	        throw new WebApplicationException("Error while uploading file. Please try again !!");
 	    }
-	    return Response.ok("Ladattu !!").build();
+	  
+	    EntityManager em2 = emf.createEntityManager();
+		em.getTransaction().begin();
+		ehdokkaat e2 = em2.find(ehdokkaat.class, id);
+		em.getTransaction().commit();
+		
+		request.setAttribute("ehdokas", e2);
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/readehdokas.jsp");
+		rd.forward(request,  response);
 	}
 	
 	
@@ -112,32 +140,45 @@ public class servicereadehdokas {
 //	}
 	
 	
-	@GET
-	@Path("/readehdokkaat")
-	@Produces(MediaType.APPLICATION_JSON)
-	@Consumes(MediaType.APPLICATION_JSON)
-	public List<ehdokkaat> readehdokkaat() {
-		EntityManager em=emf.createEntityManager();
-		em.getTransaction().begin();
-		List<ehdokkaat> list=em.createQuery("select f from ehdokkaat f").getResultList();		
-		em.getTransaction().commit();
-		return list;
-	}	
-	
-	
-//	@POST
-//	@Path("pictodatabase")
-//	@Consumes(MediaType.MULTIPART_FORM_DATA)
-//	public void addkuva(@FormDataParam("file") InputStream fileInputStream,
-//			@FormDataParam("file") FormDataContentDisposition fileMetaData,
-//			@FormDataParam("nimi") String nimi) {
-//		
-//		kuva Kuva = new kuva(fileMetaData.getFileName(), nimi);
-//		EntityManager em = emf.createEntityManager();
+//	@GET
+//	@Path("/readehdokkaat")
+//	@Produces(MediaType.APPLICATION_JSON)
+//	@Consumes(MediaType.APPLICATION_JSON)
+//	public List<ehdokkaat> readehdokkaat() {
+//		EntityManager em=emf.createEntityManager();
 //		em.getTransaction().begin();
-//		em.persist(Kuva);
+//		List<ehdokkaat> list=em.createQuery("select f from ehdokkaat f").getResultList();		
 //		em.getTransaction().commit();
-//	}
+//		return list;
+//	}	
+	
+	
+	@POST
+	@Path("pictodatabase")
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public void addkuva(@FormDataParam("file") InputStream fileInputStream,
+			@FormDataParam("file") FormDataContentDisposition fileMetaData,
+			@FormDataParam("nimi") String nimi, @FormDataParam("id") int id ) {
+		
+	
+
+		EntityManager em1 = emf.createEntityManager(); // hakee id:n perusteella ehdokkaan
+        em1.getTransaction().begin();
+        ehdokkaat e = em1.find(ehdokkaat.class,id);
+        em1.getTransaction().commit();
+		
+		ehdokkaat e1 = new ehdokkaat(e.getEhdokas_id(), e.getEtunimi(), e.getEhdokas_num(),
+		e.getKotipaikkakunta(), e.getIka(), e.getAmmatti(), e.getKommentti(), fileMetaData.getFileName());
+        
+        
+        
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		em.merge(e1);
+		em.getTransaction().commit();
+		
+		
+	}
 			
 			
 }
