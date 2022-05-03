@@ -39,8 +39,6 @@ public class showKysymykset extends HttpServlet {
 			System.out.println("No connection to database");
 		}
 		
-		
-		
 		request.setAttribute("kysymyslista", lista);
 
 		RequestDispatcher rd = request.getRequestDispatcher("/jsp/KysymyksetFile.jsp");

@@ -44,7 +44,6 @@ public class showTulokset extends HttpServlet {
 		ArrayList<Tulos> vastauslista = new ArrayList<Tulos>();
 		ArrayList<kysymys> kysymyslista = null;
 		ArrayList<ehdokasVastaukset> ehdokasVastauksetLista = null;
-		ArrayList<ehdokasVastaukset> ehdokkaanVastaukset = null;
 		ArrayList<Ehdokas> ehdokasJaPisteet = new ArrayList<Ehdokas>();
 
 //		Haetaan tietokannasta kysymykset 
@@ -66,7 +65,7 @@ public class showTulokset extends HttpServlet {
 			System.out.println("No connection to database");
 		}
 
-//		Loopataan kysymyslista ja lisätään vastauksen kysymyksen mukaan vastauslistaan
+//		Loopataan kysymyslista ja lisï¿½tï¿½ï¿½n vastauksen kysymyksen mukaan vastauslistaan
 		for (int i = 1; kysymyslista != null && i < kysymyslista.size() + 1; i++) {
 			String tulos = request.getParameter("q" + i);
 			Tulos t = new Tulos(i, tulos);
@@ -74,7 +73,7 @@ public class showTulokset extends HttpServlet {
 		}
 
 		
-//		Tämä ottaa kaikkien ehdokkaiden vastaukset ja
+//		Tï¿½mï¿½ ottaa kaikkien ehdokkaiden vastaukset ja
 //		laskee pisteet kaikille ehdokkaille
 		
 		int k = 0;
@@ -95,7 +94,7 @@ public class showTulokset extends HttpServlet {
 			k += vastauslista.size();
 		}
 
-//		Lähetetään vastauslista eteenpäin showTulokset.jsp sivulle	
+//		Lï¿½hetetï¿½ï¿½n vastauslista eteenpï¿½in showTulokset.jsp sivulle	
 
 		if (request.getParameter("kysymyksetSubmit") != null) {
 			request.setAttribute("vastaukset", ehdokasJaPisteet);

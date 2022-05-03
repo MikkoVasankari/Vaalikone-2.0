@@ -1,6 +1,7 @@
 package data;
 
 public class Ehdokas {
+	
     private int id;
     private String etunimi;
     private String kotipaikkakunta;
@@ -9,6 +10,7 @@ public class Ehdokas {
     private String kommentti;
     private String ehdokas_num;
     private int tulos;
+    
     public int getTulos() {
 		return tulos;
 	}
