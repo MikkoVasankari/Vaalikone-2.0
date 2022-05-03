@@ -9,7 +9,9 @@
 	</welcome-file-list>
 
 	<servlet>
+
 		<servlet-name>ehdokasservice</servlet-name>
+
 		<servlet-class>org.glassfish.jersey.servlet.ServletContainer</servlet-class>
 		<!-- init-param tells in which package(s) REST services are Value of param-value 
 			can be comma separated list -->
@@ -30,7 +32,11 @@
 		the REST service is found (e.g. http://my.server.fi/rest) and the rest of 
 		the path is given in the REST class and in its methods -->
 	<servlet-mapping>
+
 		<servlet-name>ehdokasservice</servlet-name>
+
+
+
 		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
 </web-app>
