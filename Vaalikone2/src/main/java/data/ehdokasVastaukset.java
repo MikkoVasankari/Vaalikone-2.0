@@ -1,7 +1,15 @@
 package data;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class ehdokasVastaukset {
 	
+		@Id
+		@GeneratedValue(strategy=GenerationType.IDENTITY)
 		int ehdokas_id;
 		int kysymys_id;
 		String vastaus;
