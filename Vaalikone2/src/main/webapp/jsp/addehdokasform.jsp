@@ -43,7 +43,7 @@ textarea {
 <title>LisaaEhdokas</title>
 </head>
 <body>
-
+<h1>Lisää ehdokas</h1>
 
 <form action='/addehdokas' method='Post'>
 <ul class="form">
