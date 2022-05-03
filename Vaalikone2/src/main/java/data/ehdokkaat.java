@@ -5,7 +5,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 @Entity // Annotoitu
 public class ehdokkaat {
 	@Id
@@ -72,6 +75,7 @@ public class ehdokkaat {
 
 	public ehdokkaat(int id) {
 		this.ehdokas_id = id;
+<<<<<<< Updated upstream
 
 	}
 
@@ -91,6 +95,76 @@ public class ehdokkaat {
 
 		}
 	}
+
+	public void setIka(String ika) {
+		try {
+			this.ika = Integer.parseInt(ika);
+=======
+
+	}
+
+	public ehdokkaat() {
+		// TODO Auto-generated constructor stub
+	}
+
+
+	public int getEhdokas_num() {
+		return ehdokas_num;
+	}
+
+	public void setEhdokas_num(String ehdokas_num) {
+		try {
+			this.ehdokas_num = Integer.parseInt(ehdokas_num);
+>>>>>>> Stashed changes
+		} catch (NumberFormatException | NullPointerException e) {
+
+		}
+	}
+<<<<<<< Updated upstream
+
+	public String getEtunimi() {
+		return etunimi;
+	}
+
+	public void setEtunimi(String etunimi) {
+		this.etunimi = etunimi;
+	}
+
+	public String getKotipaikkakunta() {
+		return kotipaikkakunta;
+	}
+
+	public void setKotipaikkakunta(String kotipaikkakunta) {
+		this.kotipaikkakunta = kotipaikkakunta;
+	}
+
+	public int getIka() {
+		return ika;
+	}
+
+	public void setIka(int ika) {
+		this.ika = ika;
+	}
+
+	public String getAmmatti() {
+		return ammatti;
+	}
+
+	public void setAmmatti(String ammatti) {
+		this.ammatti = ammatti;
+	}
+
+	public String getKommentti() {
+		return kommentti;
+	}
+
+	public void setKommentti(String kommentti) {
+		this.kommentti = kommentti;
+	}
+
+}
+=======
+>>>>>>> Stashed changes
 
 	public void setIka(String ika) {
 		try {
@@ -141,4 +215,3 @@ public class ehdokkaat {
 	}
 
 }
-

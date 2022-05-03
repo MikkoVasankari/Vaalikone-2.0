@@ -14,6 +14,8 @@ xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org
 	<class>data.kysymys</class>
 	<class>data.Tulos</class>
 	<class>data.ehdokkaat</class>
+	<class>data.kysymykset</class>
+	<class>data.vastaukset</class>
 <!-- If using MySQL 5.7 or newer -->
 
 		

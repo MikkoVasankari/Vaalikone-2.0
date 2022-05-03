@@ -89,7 +89,7 @@ public class ehdokasService {
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		@SuppressWarnings("unchecked")
-		List<vastaukset> list = em.createQuery("select x from vastaukset x").getResultList();
+		List<vastaukset> list = em.createQuery("select b from vastaukset b").getResultList();
 		em.getTransaction().commit();
 		return list;
 	}
