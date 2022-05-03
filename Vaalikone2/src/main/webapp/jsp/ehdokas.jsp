@@ -44,7 +44,7 @@ body {
 		out.println("<p id=ehdokas value=" + ehdokas.getEhdokas_num() + ">" + ehdokas.getEhdokas_num() + ". "
 				+ ehdokas.getEtunimi());
 		
-		out.println("<input type='hidden' name='id' value='"+ ehdokas.getEhdokas_id() +"'>");
+		out.println("<input type='hidden' name='id' value='"+ ehdokas.getEhdokas_Id() +"'>");
 		%>
 
 		<h4>Ehdokkaan antamat vastaukset kysymyksiin</h4>
