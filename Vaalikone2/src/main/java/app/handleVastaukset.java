@@ -68,9 +68,6 @@ public class handleVastaukset extends HttpServlet {
 		List<kysymykset> list2 = em3.createQuery("select x from kysymykset x").getResultList();
 		em3.getTransaction().commit();
 
-//		// Käytetään updateVastaukset metodia, joka tallentaa vastaukset tietokantaa
-//		updateVastaukset(request);
-
 		request.setAttribute("ehdokas", e);
 		request.setAttribute("ehdokkaanvastaukset", list1);
 		request.setAttribute("kysymykset", list2);
@@ -79,6 +76,7 @@ public class handleVastaukset extends HttpServlet {
 
 	}
 
+//	Vastauksien tuloksien päivittäminen tietokantaan
 	private void updateVastaukset(HttpServletRequest request) {
 
 		String ehdokasid = request.getParameter("id");
