@@ -77,14 +77,14 @@
 /* Container 2 */
 .container2 {
 	padding-left: 220px;
-	padding-top: 200px; . container { font-size : 15px;
+	padding-top: 200px; 
 
-	padding-top: 200px;
-	
 }
 .container {
 	font-size: 15px;
-
+	
+	
+	padding-top: 200px;
 	font-style: italic;
 	text-align: center;
 }

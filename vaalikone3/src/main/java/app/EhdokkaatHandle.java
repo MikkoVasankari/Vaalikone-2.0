@@ -64,7 +64,7 @@ public class EhdokkaatHandle extends HttpServlet {
 
 	
 	private List<ehdokkaat> addEhdokas(HttpServletRequest request) {
-		//A Fish object to send to our web-service 
+		
 		ehdokkaat eh=new ehdokkaat(request.getParameter("etunimi"), Integer.parseInt(request.getParameter("ehdokas_num")),
 				request.getParameter("ammatti"), Integer.parseInt(request.getParameter("ika")),request.getParameter("kommentti"), request.getParameter("kotipaikkakunta"));
 		

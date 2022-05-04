@@ -161,38 +161,7 @@ public class servicereadehdokas {
 	}
 	
 	
-//	@PUT
-//	@Path("/deletepicture/{kuva}")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	@Consumes(MediaType.APPLICATION_JSON)
-//	public void deletePicture(@PathParam("kuva") String kuva,
-//			@Context HttpServletRequest request,
-//			@Context HttpServletResponse response
-//			) {
-//		EntityManager em=emf.createEntityManager();
-//		em.getTransaction().begin();
-//		ehdokkaat f=em.find(ehdokkaat.class, kuva);
-//		if (f!=null) {
-//			em.remove(f);//The actual delete line
-//		}
-//		em.getTransaction().commit();
-//		
-//		
-//	}
-	
-	
-//	@GET
-//	@Path("/readehdokkaat")
-//	@Produces(MediaType.APPLICATION_JSON)
-//	@Consumes(MediaType.APPLICATION_JSON)
-//	public List<ehdokkaat> readehdokkaat() {
-//		EntityManager em=emf.createEntityManager();
-//		em.getTransaction().begin();
-//		List<ehdokkaat> list=em.createQuery("select f from ehdokkaat f").getResultList();		
-//		em.getTransaction().commit();
-//		return list;
-//	}	
-	
+
 	
 	@POST
 	@Path("pictodatabase")
@@ -242,10 +211,10 @@ public class servicereadehdokas {
 		em.getTransaction().begin();
 		vastaukset v=em.find(vastaukset.class, vastaus.getVastaus());
 		if (v!=null) {
-			em.merge(vastaus);//The actual update line
+			em.merge(vastaus);
 		}
 		em.getTransaction().commit();
-		//Calling the method readFish() of this service
+		
 		List<vastaukset> list=getVastaukset();		
 		return list;
 	}

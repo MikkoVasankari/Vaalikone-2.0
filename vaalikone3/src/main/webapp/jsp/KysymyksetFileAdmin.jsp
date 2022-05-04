@@ -56,7 +56,7 @@ table {
 
 
 
-	<button type="submit" onclick="location.href='welcome.jsp'">Palaa
+	<button type="submit" onclick="location.href='/jsp/welcome.jsp'">Palaa
 		takaisin</button>
 </body>
 </html>
