@@ -27,7 +27,7 @@ import data.vastaukset;
 /**
  * Servlet implementation class handleVastaukset
  */
-@WebServlet("/handleVastaukset")
+@WebServlet(urlPatterns = { "/handleVastaukset", "/lisaaVastaukset" })
 public class handleVastaukset extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
@@ -41,13 +41,21 @@ public class handleVastaukset extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		String action = request.getServletPath();
+		switch (action) {
+		case "/handleVastaukset":
+			// Käytetään updateVastaukset metodia, joka tallentaa vastaukset tietokantaa
+			updateVastaukset(request);
+			break;
+					
+		case "/lisaaVastaukset":
+			// Käytetään lisaaVastaukset metodia, joka tallentaa uudelle ehdokkaalle vastaukset tietokantaan
+			lisaaVastaukset(request);
+			break;
+		}
 
 		String ehdokasid = request.getParameter("id");
 		int integerehdokasid = Integer.parseInt(ehdokasid);
-
-		// Käytetään updateVastaukset metodia, joka tallentaa vastaukset tietokantaa
-		updateVastaukset(request);
-
 		// Haetaan tietty ehdokas
 		EntityManager em1 = emf.createEntityManager();
 		em1.getTransaction().begin();
@@ -71,18 +79,18 @@ public class handleVastaukset extends HttpServlet {
 		request.setAttribute("ehdokas", e);
 		request.setAttribute("ehdokkaanvastaukset", list1);
 		request.setAttribute("kysymykset", list2);
-		RequestDispatcher rd = request.getRequestDispatcher("/jsp/ehdokas.jsp");
+		RequestDispatcher rd = request.getRequestDispatcher("/jsp/readehdokas.jsp");
 		rd.forward(request, response);
 
 	}
 
-//	Vastauksien tuloksien päivittäminen tietokantaan
+//	Vastauksien päivittäminen tietokantaan
 	private void updateVastaukset(HttpServletRequest request) {
 
 		String ehdokasid = request.getParameter("id");
 		int integerID = Integer.parseInt(ehdokasid);
 
-//		Haetaan kaikki vastaukset tietokannasta
+//		Haetaan tietyn ehdokkaan kaikki vastaukset tietokannasta
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		@SuppressWarnings("unchecked")
@@ -118,7 +126,57 @@ public class handleVastaukset extends HttpServlet {
 			Builder b = wt.request();
 			Entity<vastaukset> e = Entity.entity(vastaus, MediaType.APPLICATION_JSON);
 			List<vastaukset> returnedList = b.put(e, genericList);
+		}
 
+	}
+	
+	
+	
+//	Uudelle ehdokkaalle vastauksien tallentaminen tietokantaan
+	private void lisaaVastaukset(HttpServletRequest request) {
+
+		String ehdokasid = request.getParameter("id");
+		int integerID = Integer.parseInt(ehdokasid);
+		
+//		Haetaan kaikki vastaukset tietokannasta
+		EntityManager em = emf.createEntityManager();
+		em.getTransaction().begin();
+		@SuppressWarnings("unchecked")
+		List<ehdokkaat> list1 = em.createQuery("select x from ehdokkaat x where x.ehdokas_id=?1")
+				.setParameter(1, integerID).getResultList();
+		em.getTransaction().commit();
+
+//		Haetaan kaikki kysymykset tietokannasta
+		EntityManager em3 = emf.createEntityManager();
+		em3.getTransaction().begin();
+		@SuppressWarnings("unchecked")
+		List<kysymykset> list2 = em3.createQuery("select x from kysymykset x").getResultList();
+		em3.getTransaction().commit();
+
+//		Ottaa vastaan annettutut vastaukset ja lähettäää ne rest-palvelun updatevastaus palveluun,
+//		joka sitten tallentaa vastaukset tietokantaa
+		GenericType<List<vastaukset>> genericList = new GenericType<List<vastaukset>>() {
+		};
+		
+
+		for (int i = 0; list2 != null && i < list2.size(); i++) {
+			int j = i + 1;
+			String q = request.getParameter("q" + j);
+			int integerQ = Integer.parseInt(q);
+			
+			
+			ehdokkaat  ehdokas = list1.get(0);
+			
+			kysymykset kysymys = list2.get(i);
+
+			vastaukset vastaus = new vastaukset(integerID, kysymys.getKysymys_id(), integerQ,
+					ehdokas.getEhdokas_num());
+			String uri = "http://127.0.0.1:8080/rest/ehdokasservice/updatevastaus";
+			Client c = ClientBuilder.newClient();
+			WebTarget wt = c.target(uri);
+			Builder b = wt.request();
+			Entity<vastaukset> e = Entity.entity(vastaus, MediaType.APPLICATION_JSON);
+			List<vastaukset> returnedList = b.put(e, genericList);
 		}
 
 	}

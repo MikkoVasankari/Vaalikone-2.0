@@ -21,10 +21,14 @@ import javax.ws.rs.core.GenericType;
 import javax.ws.rs.core.MediaType;
 
 import data.ehdokkaat;
+import data.kysymykset;
+import data.vastaukset;
 
 @WebServlet(urlPatterns = { "/readehdokkaat", "/readtoupdateehdokkaat", "/addehdokas", "/deleteehdokas" })
 public class EhdokkaatHandle extends HttpServlet {
-
+	
+	EntityManagerFactory emf = Persistence.createEntityManagerFactory("vaalikone");
+	
 	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException {
 		doGet(request, response);
@@ -63,7 +67,7 @@ public class EhdokkaatHandle extends HttpServlet {
 		//A Fish object to send to our web-service 
 		ehdokkaat eh=new ehdokkaat(request.getParameter("etunimi"), Integer.parseInt(request.getParameter("ehdokas_num")),
 				request.getParameter("ammatti"), Integer.parseInt(request.getParameter("ika")),request.getParameter("kommentti"), request.getParameter("kotipaikkakunta"));
-		System.out.println(eh);
+		
 		String uri = "http://127.0.0.1:8080/rest/vaalikoneservice/addehdokas";
 		Client c=ClientBuilder.newClient();
 		WebTarget wt=c.target(uri);
@@ -78,7 +82,6 @@ public class EhdokkaatHandle extends HttpServlet {
 		List<ehdokkaat> returnedList=b.post(en, genericList);
 		return returnedList;
 	}
-	
 	
 
 	private ehdokkaat readtoupdateehdokkaat(HttpServletRequest request) {

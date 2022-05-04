@@ -82,7 +82,7 @@ table {
 		<a>Ehdokkaan numero ${ehdokkaat.ehdokas_num}</a><br>
 		<a href="/deleteehdokas?ehdokas_id=${ehdokkaat.ehdokas_id}" onclick="return confirm('Oletko varma, että haluat poistaa ehdokkaan')">Poista ehdokas </a>
 		<br>
-		<a href="/readtoupdateehdokkaat?ehdokas_id=${ehdokkaat.ehdokas_id}">Muokkaa ehdokasta</a>
+		<a href="/rest/read1ehdokas/getehdokas/${ehdokkaat.ehdokas_id}">Muokkaa ehdokasta</a>
 		<br><br><br><br>
 	</c:forEach>
 
