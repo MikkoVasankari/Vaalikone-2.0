@@ -19,12 +19,46 @@
 body {
     background-color: powderblue;
 }
+.button1 {
+	text-decoration: none;
+	font-size: 25px;
+	color: black;
+	padding: 10px 25px;
+	border: 3px solid green;
+	position: relative;
+}
+
+.button1::before, .button1::after {
+	content: "";
+	position: absolute;
+	width: 40px;
+	height: 40px;
+	border: inherit;
+	transition: all 1s;
+}
+
+.button1::before {
+	top: -15px;
+	left: -15px;
+	border-width: 3px 0 0 3px;
+}
+
+.button1::after {
+	bottom: -15px;
+	right: -15px;
+	border-width: 0 3px 3px 0;
+}
+
+.button1:hover::before, .button1:hover::after {
+	width: calc(100% + 27px);
+	height: calc(100% + 27px);
+}
 </style>
 
 
 </head>
-<link rel="stylesheet" href="tyyli.css">
-<link href="css/style.css" rel="stylesheet">
+<link rel="stylesheet" href="./tyyli.css">
+<link href="./css/style.css" rel="stylesheet">
 <body>
 
     <div class="wrapper2">

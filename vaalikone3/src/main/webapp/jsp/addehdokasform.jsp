@@ -59,7 +59,7 @@ textarea {
 
 </ul>
 </form>
-
+<a type="submit" class='button1' href='/rest/vaalikoneservice/getehdokkaat'>Palaa takaisin</a>
 
 </body>
 </html>

@@ -12,18 +12,18 @@
 <style>
 body {
 	text-align: center;
-    background-color: powderblue;
+	background-color: powderblue;
 }
-
 
 table {
 	margin-left: auto;
 	margin-right: auto;
 }
+
 .wrapper2 {
-    text-align: center;
-    
+	text-align: center;
 }
+
 .button1 {
 	text-decoration: none;
 	font-size: 25px;
@@ -61,37 +61,42 @@ table {
 </style>
 <title>Muokkaa ehdokkaita</title>
 </head>
-<link href="../css/style.css" rel="stylesheet">
-<link href="../tyyli.css" rel="stylesheet">
+<link href="./css/style.css" rel="stylesheet">
+<link href="./tyyli.css" rel="stylesheet">
 <body>
-<br></br> <br></br>
+	<br></br>
+	<br></br>
 	<div class="wrapper2">
 
-		<a href='/jsp/addehdokasform.jsp' class='button1'>LISÄÄ EHDOKAS</a>
-
-	
-<br></br>
+		<a href='/jsp/addehdokasform.jsp' class='button1'>LISÄÄ EHDOKAS</a> <br></br>
 
 
 
 
-	<c:forEach var="ehdokkaat" items="${requestScope.ehdokkaat}">
-		<h3>Ehdokas</h3>
-		
-		<h4>${ehdokkaat.etunimi}</h4>
-		<a>Ehdokkaan numero ${ehdokkaat.ehdokas_num}</a><br>
-		<a href="/deleteehdokas?ehdokas_id=${ehdokkaat.ehdokas_id}" onclick="return confirm('Oletko varma, että haluat poistaa ehdokkaan')">Poista ehdokas </a>
-		<br>
-		<a href="/rest/read1ehdokas/getehdokas/${ehdokkaat.ehdokas_id}">Muokkaa ehdokasta</a>
-		<br><br><br><br>
-	</c:forEach>
+		<c:forEach var="ehdokkaat" items="${requestScope.ehdokkaat}">
+			<h3>Ehdokas</h3>
+
+			<h4>${ehdokkaat.etunimi}</h4>
+			<a>Ehdokkaan numero ${ehdokkaat.ehdokas_num}</a>
+			<br>
+			<a href="/deleteehdokas?ehdokas_id=${ehdokkaat.ehdokas_id}"
+				onclick="return confirm('Oletko varma, että haluat poistaa ehdokkaan')">Poista
+				ehdokas </a>
+			<br>
+			<a href="/rest/read1ehdokas/getehdokas/${ehdokkaat.ehdokas_id}">Muokkaa
+				ehdokasta</a>
+			<br>
+			<br>
+			<br>
+			<br>
+		</c:forEach>
+
+
+		<a type="submit" class='button1' href='/jsp/welcome.jsp'>Palaa takaisin</a>
 
 
 
-
-
-
-</div>
+	</div>
 
 </body>
 </html>

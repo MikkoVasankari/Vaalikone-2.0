@@ -138,7 +138,7 @@ public class handleVastaukset extends HttpServlet {
 		String ehdokasid = request.getParameter("id");
 		int integerID = Integer.parseInt(ehdokasid);
 		
-//		Haetaan kaikki vastaukset tietokannasta
+//		Haetaan ehdokkaan tiedot tietokannasta
 		EntityManager em = emf.createEntityManager();
 		em.getTransaction().begin();
 		@SuppressWarnings("unchecked")
