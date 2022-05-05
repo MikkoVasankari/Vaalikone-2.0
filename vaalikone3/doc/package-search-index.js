@@ -1,0 +1,1 @@
+packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"app"},{"l":"dao"},{"l":"data"},{"l":"service"},{"l":"vaalikone3"}]
